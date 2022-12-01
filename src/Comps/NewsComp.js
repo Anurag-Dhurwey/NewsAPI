@@ -9,19 +9,49 @@ export default class NewsComp extends Component {
 constructor(){
   super();
   this.state={
-    articles:[]
+    articles:[],
+    page:1,
+    pagesize:12,
   }
 }
 
  async componentDidMount(){
-  let url="https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=2b8542c3f43e4009802f8aa7c7be93a4";
+  let url=`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=2b8542c3f43e4009802f8aa7c7be93a4&page=1&pageSize=${this.state.pagesize}`;
   let data=await fetch(url);
   let parsedata= await data.json();
  
-  this.setState({articles:parsedata.articles})
+  this.setState({
+    articles:parsedata.articles,
+    totalResult:parsedata.totalResults,
+    
+  })
 }
-
-
+  Preclick= async()=>{
+    let url=`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=2b8542c3f43e4009802f8aa7c7be93a4&page=${this.state.page-1}&pageSize=${this.state.pagesize}`;
+  let data=await fetch(url);
+  let parsedata= await data.json();
+ 
+  this.setState({
+    articles:parsedata.articles,
+    page:this.state.page-1
+  })
+  }
+  Nextclick=async()=>{
+    if(this.state.page + 1 > Math.ceil(this.state.totalResult/this.state.pagesize)){
+       
+    }else{
+      let url=`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=2b8542c3f43e4009802f8aa7c7be93a4&page=${this.state.page+1}&pageSize=${this.state.pagesize}`;
+      let data=await fetch(url);
+      let parsedata= await data.json();
+     
+      this.setState({
+        articles:parsedata.articles,
+        page:this.state.page+1
+      })
+      
+    }
+    
+  }
   render() {
     return (
       <>
@@ -33,6 +63,10 @@ constructor(){
             </div>     
           //  "https://picsum.photos/450/201"
           })}
+      </div>
+      <div className='container d-flex justify-content-around'>
+      <button disabled={this.state.page<=1} type="button" className="btn btn-outline-dark" onClick={this.Preclick}>&larr; Previous</button>
+      <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResult/this.state.pagesize)} type="button" className="btn btn-outline-dark" onClick={this.Nextclick}>Next &rarr;</button>
       </div>
       </div>
       </>
