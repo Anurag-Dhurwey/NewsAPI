@@ -8,10 +8,10 @@ export default class News extends Component {
     return (
       <>
          <div className="card my-3" style={{width: "16rem"}}>
-          <img src={!imgUrl?setImg:imgUrl} className="card-img-top" alt="..."/>
+          <img src={!imgUrl?setImg:imgUrl} className="card-img-top" style={{height:"120px"}} alt="..."/>
           <div className="card-body text-center">
-            <h5 className="card-title">{title}</h5>
-            <p className="card-text">{!description?setDescription:description}</p>
+            <h5 className="card-title">{title}.....</h5>
+            <p className="card-text">{!description?setDescription:description}.......</p>
             <a href={newsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-primary">Read more</a>
           </div>
        </div>
