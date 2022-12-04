@@ -4,36 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default class Navbar extends Component {
 
-  constructor(){
-    super();
-    this.state={
-      Mode:"dark",
-      Tmode:"light"
-    }
-  }
-
-  ChangeMode=()=>{
-    if(this.state.Mode==="dark"){
-      document.body.style.backgroundColor="black";
-      document.body.style.color='white'
-      this.setState({
-        Mode:"light",
-        Tmode:"dark"
-      } )
-      
-      
-    }else if(this.state.Mode==="light"){
-      document.body.style.backgroundColor="white";
-      document.body.style.color='black'
-      this.setState({
-        Mode:"dark",
-        Tmode:"light"
-        
-      } )
-     
-    }
-    
-  }
+  
 
   render() {
     return (
@@ -73,7 +44,7 @@ export default class Navbar extends Component {
       </ul>
  
     <div className="form-check form-switch">
-      <input className="form-check-input" type="checkbox" onClick={this.ChangeMode} role="switch" aria-checked id="flexSwitchCheckDefault"/>
+      <input className="form-check-input" type="checkbox" onClick={this.props.DarkMode} role="switch" aria-checked id="flexSwitchCheckDefault"/>
       <label className={`form-check-label text-light`} htmlFor="flexSwitchCheckDefault">Dark mode</label>
   </div>
   </div>

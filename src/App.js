@@ -5,14 +5,45 @@ import Navbar from './Comps/Navbar'
 import NewsComp from './Comps/NewsComp'
 
 export default class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      Mode:"dark",
+      Tmode:"light"
+    }
+  }
+
+ 
   render() {
     let country='in';
     let pagesize=4;
     let category='general'
     let ApiKey='33efbe1d43584f64a87c6114493c66f3'
+    let  ChangeMode=()=>{
+      if(this.state.Mode==="dark"){
+        document.body.style.backgroundColor="black";
+        document.body.style.color='white'
+        this.setState({
+          Mode:"light",
+          Tmode:"dark"
+        } )
+        
+        
+      }else if(this.state.Mode==="light"){
+        document.body.style.backgroundColor="white";
+        document.body.style.color='black'
+        this.setState({
+          Mode:"dark",
+          Tmode:"light"
+          
+        } )
+       
+      }
+      
+    }
     return (
       <>
-      <Navbar/>
+      <Navbar DarkMode={ChangeMode}/>
       <Routes>
         <Route path='/' element={<NewsComp Country={country} pagesize={pagesize} Category={category} ApiKey={ApiKey}/>}/>
         <Route path='/business' element={<NewsComp  exact key={'business'} Country={country} pagesize={pagesize} Category={'business'} ApiKey={ApiKey}/>}/>
