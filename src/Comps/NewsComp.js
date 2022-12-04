@@ -55,11 +55,7 @@ export default class NewsComp extends Component {
     });
   };
   Nextclick = async () => {
-    if (
-      this.state.page + 1 >
-      Math.ceil(this.state.totalResult / this.props.pagesize)
-    ) {
-    } else {
+   
       let url = `https://newsapi.org/v2/top-headlines?country=${
         this.props.Country
       }&category=${
@@ -74,7 +70,7 @@ export default class NewsComp extends Component {
         page: this.state.page + 1,
         loading: false,
       });
-    }
+    
   };
   render() {
     return (
