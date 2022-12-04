@@ -99,7 +99,8 @@ export default class NewsComp extends Component {
                     author={element.author}
                     date={element.publishedAt}
                     source={element.source.name}
-                  />
+                    Dmode={this.props.DMode}
+                    Tmode={this.props.TMode}/>
                 </div>
               );
             })}

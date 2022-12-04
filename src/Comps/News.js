@@ -10,12 +10,14 @@ export default class News extends Component {
       author,
       date,
       source,
+      Dmode,
+      Tmode,
     } = this.props;
     let setImg = "https://picsum.photos/450/300";
     let setDescription = "To read click on below button";
     return (
       <>
-        <div className="container justify-content-center card my-3 bg-dark text-light">
+        <div className={`container justify-content-center card my-3 bg-${Dmode} text-${Tmode}`}>
           <img
             src={!imgUrl ? setImg : imgUrl}
             className="card-img-top"
