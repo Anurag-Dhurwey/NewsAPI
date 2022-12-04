@@ -8,7 +8,7 @@ export default class NewsComp extends Component {
     Country: "in",
     pagesize: 4,
     Category: "genral",
-    ApiKey:'33efbe1d43584f64a87c6114493c66f3',
+    ApiKey: "33efbe1d43584f64a87c6114493c66f3",
   };
 
   static propTypes = {
@@ -40,10 +40,8 @@ export default class NewsComp extends Component {
   Preclick = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=${
       this.props.Country
-    }&category=${
-      this.props.Category
-    }&apiKey=${this.props.ApiKey}&page=${this.state.page -
-      1}&pageSize=${this.props.pagesize}`;
+    }&category=${this.props.Category}&apiKey=${this.props.ApiKey}&page=${this
+      .state.page - 1}&pageSize=${this.props.pagesize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedata = await data.json();
@@ -55,22 +53,18 @@ export default class NewsComp extends Component {
     });
   };
   Nextclick = async () => {
-   
-      let url = `https://newsapi.org/v2/top-headlines?country=${
-        this.props.Country
-      }&category=${
-        this.props.Category
-      }&apiKey=${this.props.ApiKey}&page=${this.state.page +
-        1}&pageSize=${this.props.pagesize}`;
-      this.setState({ loading: true });
-      let data = await fetch(url);
-      let parsedata = await data.json();
-      this.setState({
-        articles: parsedata.articles,
-        page: this.state.page + 1,
-        loading: false,
-      });
-    
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.Country
+    }&category=${this.props.Category}&apiKey=${this.props.ApiKey}&page=${this
+      .state.page + 1}&pageSize=${this.props.pagesize}`;
+    this.setState({ loading: true });
+    let data = await fetch(url);
+    let parsedata = await data.json();
+    this.setState({
+      articles: parsedata.articles,
+      page: this.state.page + 1,
+      loading: false,
+    });
   };
   render() {
     return (
@@ -96,7 +90,8 @@ export default class NewsComp extends Component {
                     date={element.publishedAt}
                     source={element.source.name}
                     Dmode={this.props.DMode}
-                    Tmode={this.props.TMode}/>
+                    Tmode={this.props.TMode}
+                  />
                 </div>
               );
             })}
