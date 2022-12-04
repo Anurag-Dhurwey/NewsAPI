@@ -109,7 +109,7 @@ export default class NewsComp extends Component {
               <button
                 disabled={this.state.page <= 1}
                 type="button"
-                className="btn btn-outline-dark"
+                className="btn btn-outline-secondary"
                 onClick={this.Preclick}
               >
                 &larr; Previous
@@ -122,7 +122,7 @@ export default class NewsComp extends Component {
                   Math.ceil(this.state.totalResult / this.props.pagesize)
                 }
                 type="button"
-                className="btn btn-outline-dark"
+                className="btn btn-outline-secondary"
                 onClick={this.Nextclick}
               >
                 Next &rarr;

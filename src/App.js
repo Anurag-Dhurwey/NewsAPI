@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './App.css';
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './Comps/Navbar'
 import NewsComp from './Comps/NewsComp'

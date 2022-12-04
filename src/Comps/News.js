@@ -15,7 +15,7 @@ export default class News extends Component {
     let setDescription = "To read click on below button";
     return (
       <>
-        <div className="container justify-content-center card my-3">
+        <div className="container justify-content-center card my-3 bg-dark text-light">
           <img
             src={!imgUrl ? setImg : imgUrl}
             className="card-img-top"
