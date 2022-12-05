@@ -16,9 +16,11 @@ export default class App extends Component {
  
   render() {
     let country='in';
-    let pagesize=4;
+    let pagesize=8;
     let category='general'
-    let ApiKey='33efbe1d43584f64a87c6114493c66f3'
+    // let ApiKey='33efbe1d43584f64a87c6114493c66f3'
+    let ApiKey='2b8542c3f43e4009802f8aa7c7be93a4'
+
     let  ChangeMode=()=>{
       if(this.state.Mode==="light"){
         document.body.style.backgroundColor="black";
