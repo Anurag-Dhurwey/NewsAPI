@@ -10,7 +10,7 @@ export default class NewsComp extends Component {
     pagesize: 4,
     Category: "genral",
     // ApiKey:'33efbe1d43584f64a87c6114493c66f3',
-    ApiKey:'2b8542c3f43e4009802f8aa7c7be93a4'
+    ApiKey: "2b8542c3f43e4009802f8aa7c7be93a4",
   };
 
   static propTypes = {
@@ -24,15 +24,17 @@ export default class NewsComp extends Component {
       articles: [],
       page: 1,
       loading: true,
-      totalResult:0,
+      totalResult: 0,
     };
   }
 
   async componentDidMount() {
+    this.props.setProgress(10);
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.Country}&category=${this.props.Category}&apiKey=${this.props.ApiKey}&page=${this.state.page}&pageSize=${this.props.pagesize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedata = await data.json();
+    this.props.setProgress(100);
 
     this.setState({
       articles: parsedata.articles,
@@ -41,11 +43,14 @@ export default class NewsComp extends Component {
     });
   }
 
-  fetchMoreData= async()=>{
+  fetchMoreData = async () => {
     this.setState({
-      page:this.state.page+1,
-    })
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.Country}&category=${this.props.Category}&apiKey=${this.props.ApiKey}&page=${this.state.page+1}&pageSize=${this.props.pagesize}`;
+      page: this.state.page + 1,
+    });
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.Country
+    }&category=${this.props.Category}&apiKey=${this.props.ApiKey}&page=${this
+      .state.page + 1}&pageSize=${this.props.pagesize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedata = await data.json();
@@ -55,8 +60,7 @@ export default class NewsComp extends Component {
       totalResult: parsedata.totalResults,
       loading: false,
     });
-    
-  }
+  };
 
   render() {
     return (
@@ -66,36 +70,36 @@ export default class NewsComp extends Component {
             {this.state.loading && <Loading Dmode={this.props.DMode} />}
           </div>
           <InfiniteScroll
-          dataLength={this.state.articles.length}
-          next={this.fetchMoreData}
-          hasMore={this.state.articles.length!==this.state.totalResult}
-          loader={this.state.loading && <Loading Dmode={this.props.DMode} />}
-        >
-          <div className="container row ">
-            {this.state.articles.map((element,index) => {
-              return (
-                <div className="col-md-3 col-lg-3 col-12" key={element.url}>
-                  <News
-                    title={element.title ? element.title.slice(0, 40) : ""}
-                    description={
-                      element.description
-                        ? element.description.slice(0, 50)
-                        : ""
-                    }
-                    imgUrl={element.urlToImage}
-                    newsUrl={element.url}
-                    author={element.author}
-                    date={element.publishedAt}
-                    source={element.source.name}
-                    Dmode={this.props.DMode}
-                    Tmode={this.props.TMode}
-                  />
-                </div>
-              );
-            })}
-          </div>
+            dataLength={this.state.articles.length}
+            next={this.fetchMoreData}
+            hasMore={this.state.articles.length !== this.state.totalResult}
+            loader={this.state.loading && <Loading Dmode={this.props.DMode} />}
+          >
+            <div className="container row ">
+              {this.state.articles.map((element, index) => {
+                return (
+                  <div className="col-md-3 col-lg-3 col-12" key={element.url}>
+                    <News
+                      title={element.title ? element.title.slice(0, 40) : ""}
+                      description={
+                        element.description
+                          ? element.description.slice(0, 50)
+                          : ""
+                      }
+                      imgUrl={element.urlToImage}
+                      newsUrl={element.url}
+                      author={element.author}
+                      date={element.publishedAt}
+                      source={element.source.name}
+                      Dmode={this.props.DMode}
+                      Tmode={this.props.TMode}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </InfiniteScroll>
-          </div>
+        </div>
       </>
     );
   }

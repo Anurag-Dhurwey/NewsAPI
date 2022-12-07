@@ -1,19 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom'
-import Navbar from './Comps/Navbar'
-import NewsComp from './Comps/NewsComp'
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './Comps/Navbar';
+import NewsComp from './Comps/NewsComp';
+import LoadingBar from 'react-top-loading-bar';
 
 export default class App extends Component {
   constructor(){
     super();
     this.state={
       Mode:"light",
-      Tmode:"dark"
+      Tmode:"dark",
+      progress:0,
     }
   }
 
- 
+   setProgress=(progress)=>{
+    this.setState({
+      progress:progress,
+    })
+  }
+
   render() {
     let country='in';
     let pagesize=8;
@@ -43,18 +50,25 @@ export default class App extends Component {
       }
       
     }
+     
+   
     return (
       <>
       <Navbar DarkMode={ChangeMode}/>
+      <LoadingBar
+        color='#00ffff'
+        progress={this.state.progress}
+        
+      />
       <Routes>
-        <Route path='/' element={<NewsComp DMode={this.state.Mode} TMode={this.state.Tmode} Country={country} pagesize={pagesize} Category={category} ApiKey={ApiKey}/>}/>
-        <Route path='/business' element={<NewsComp DMode={this.state.Mode} TMode={this.state.Tmode}  exact key={'business'} Country={country} pagesize={pagesize} Category={'business'} ApiKey={ApiKey}/>}/>
-        <Route path='/entertainment' element={<NewsComp DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'entertainment'} Country={country} pagesize={pagesize} Category={'entertainment'} ApiKey={ApiKey}/>}/>
-        <Route path='/general' element={<NewsComp DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'general'} Country={country} pagesize={pagesize} Category={'general'} ApiKey={ApiKey}/>}/>
-        <Route path='/health' element={<NewsComp DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'health'} Country={country} pagesize={pagesize} Category={'health'}/>} ApiKey={ApiKey}/>
-        <Route path='/science' element={<NewsComp DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'science'} Country={country} pagesize={pagesize} Category={'science'} ApiKey={ApiKey}/>}/>
-        <Route path='/sports' element={<NewsComp DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'sports'} Country={country} pagesize={pagesize} Category={'sports'}/>} ApiKey={ApiKey}/>
-        <Route path='/technology' element={<NewsComp DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'technology'} Country={country} pagesize={pagesize} Category={'technology'} ApiKey={ApiKey}/>}/>
+        <Route path='/' element={<NewsComp setProgress={this.setProgress}  DMode={this.state.Mode} TMode={this.state.Tmode} Country={country} pagesize={pagesize} Category={category} ApiKey={ApiKey}/>}/>
+        <Route path='/business' element={<NewsComp setProgress={this.setProgress}  DMode={this.state.Mode} TMode={this.state.Tmode}  exact key={'business'} Country={country} pagesize={pagesize} Category={'business'} ApiKey={ApiKey}/>}/>
+        <Route path='/entertainment' element={<NewsComp setProgress={this.setProgress}  DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'entertainment'} Country={country} pagesize={pagesize} Category={'entertainment'} ApiKey={ApiKey}/>}/>
+        <Route path='/general' element={<NewsComp setProgress={this.setProgress}  DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'general'} Country={country} pagesize={pagesize} Category={'general'} ApiKey={ApiKey}/>}/>
+        <Route path='/health' element={<NewsComp setProgress={this.setProgress}  DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'health'} Country={country} pagesize={pagesize} Category={'health'}/>} ApiKey={ApiKey}/>
+        <Route path='/science' element={<NewsComp  setProgress={this.setProgress} DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'science'} Country={country} pagesize={pagesize} Category={'science'} ApiKey={ApiKey}/>}/>
+        <Route path='/sports' element={<NewsComp setProgress={this.setProgress}  DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'sports'} Country={country} pagesize={pagesize} Category={'sports'}/>} ApiKey={ApiKey}/>
+        <Route path='/technology' element={<NewsComp setProgress={this.setProgress}  DMode={this.state.Mode} TMode={this.state.Tmode} exact key={'technology'} Country={country} pagesize={pagesize} Category={'technology'} ApiKey={ApiKey}/>}/>
           
       </Routes>
       </>
